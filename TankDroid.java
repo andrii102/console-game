@@ -4,9 +4,15 @@ public class TankDroid extends Droid{
 
     int shield;
 
-    public TankDroid(String name, int health, int damage, int shield, String COLLOR) {
-        super(name, health, damage, "TankDroid", COLLOR);
-        this.shield = shield;
+    public TankDroid(String name,String COLLOR) {
+        super(name, 150, 40, "TankDroid", COLLOR);
+        shield = 50;
+    }
+
+    @Override
+    public void recover() {
+        health = fullHealth;
+        shield = 50;
     }
 
     public int getShield(){

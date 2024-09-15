@@ -3,11 +3,17 @@ public class Rseries extends Droid{
     int heal;   //heal itself
     int count;  //every 3 atacks opens super atack
     int superAtack; 
-    public Rseries(int heal, int superAtack, String name, int health, int damage, String COLLOR){
-        super(name, health, damage, "Rseries",COLLOR);
-        this.heal = heal;
-        this.count = -1;
-        this.superAtack = superAtack;
+    public Rseries(String name, String COLLOR){
+        super(name, 100, 20, "Rseries",COLLOR);
+        heal = 15;
+        count = -1;
+        superAtack = 50;
+    }
+
+    @Override
+    public void recover() {
+        health = fullHealth;
+        count = -1;
     }
 
     public int getHeal(){

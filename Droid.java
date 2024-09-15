@@ -7,8 +7,8 @@ public class Droid{
     public static  String RED = "\u001B[31m";         // Red for damage
     public static  String GREEN = "\u001B[32m";       // Green for droid names
     
-    
     String name;
+    int fullHealth;
     int health;
     int damage;
     String series;
@@ -20,11 +20,16 @@ public class Droid{
 
     public Droid(String name,int health, int damage, String series, String COLLOR){
         this.name = name;
+        fullHealth = health;
         this.health = health;
         this.damage = damage;
         this.series = series;
         this.COLLOR = COLLOR;
         minDamage = (int)(0.75 * damage);
+    }
+
+    public void recover(){
+        health = fullHealth;
     }
 
     public String getName(){
@@ -46,6 +51,8 @@ public class Droid{
     public boolean isDead(){
         return dead;
     }
+
+
 
     public void takeDamage(int damage){
         health = health - damage;
