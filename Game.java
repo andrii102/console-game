@@ -19,7 +19,7 @@ public class Game {
     
     private static final Random rand = new Random();
 
-    public static Droid Duel(Droid droid1, Droid droid2) {
+    public static Droid duel(Droid droid1, Droid droid2) {
         System.out.println("Duel between " + droid1.COLLOR + droid1.getName() + RESET + " and " + droid2.COLLOR + droid2.getName() + RESET +" is starting...");
         while (!droid1.isDead() && !droid2.isDead()) {
             droid1.attack(droid2); 
@@ -39,7 +39,7 @@ public class Game {
         return null;
     }
 
-    public static void TeamBattle(String team1_name, List<Droid> team1, String team2_name, List<Droid> team2) {
+    public static void teamBattle(String team1_name, List<Droid> team1, String team2_name, List<Droid> team2) {
         System.out.print("\nTeam battle between " + RED + team1_name + RESET + " and " +BLUE + team2_name + RESET + " is starting...\n");
         
         System.out.print("\n" + RED + team1_name + RESET + ": \n");
@@ -56,7 +56,7 @@ public class Game {
         for (Droid droid : team2){
             System.out.println(BLUE + droid.getName() + RESET);
             if(droid instanceof Hseries){
-                List <Droid> teammates = new ArrayList<>(team1);
+                List <Droid> teammates = new ArrayList<>(team2);
                 teammates.remove(droid);
                 ((Hseries)droid).teammates = teammates;
             }
@@ -89,7 +89,7 @@ public class Game {
                 }
             }
     
-            int randIndexT1 = rand.nextInt(team1.size()); // +1 because we removed one element from attacksT1 attacksT1.size()+1
+            int randIndexT1 = rand.nextInt(team1.size());
             team2.get(randAttacker(attacksT2)).attack(team1.get(randIndexT1));
             if(team1.get(randIndexT1).isDead()){
                 team1.remove(randIndexT1);
@@ -108,6 +108,7 @@ public class Game {
             }
         }
     }
+
     public static void populateIndexList(List<Integer> list, int indexes) {
         for(int i = 0; i < indexes; i++) 
             list.add(i);
@@ -166,7 +167,7 @@ public class Game {
                     int index1 = scanner.nextInt();
                     System.out.println("Enter second droid #: ");
                     int index2 = scanner.nextInt();
-                    droidList.remove(Duel(droidList.get(index1-1), droidList.get(index2-1)));
+                    droidList.remove(duel(droidList.get(index1-1), droidList.get(index2-1)));
                     break;
                 case 4:System.out.println("Team battle:");
 
@@ -177,7 +178,7 @@ public class Game {
                     System.out.println("Enter second team name: ");
                     String team2_name = scanner.next();
                     List<Droid> team2 = createTeam(droidList, team2_name, scanner);
-                    TeamBattle(team1_name, team1, team2_name, team2);
+                    teamBattle(team1_name, team1, team2_name, team2);
                     break;
                 case 5:
                     System.out.println("Write to file:");
@@ -205,7 +206,7 @@ public class Game {
                         PrintStream fileOut = new PrintStream(new FileOutputStream(filename));
                         // Redirect standard output to the file
                         System.setOut(fileOut);
-                        droidList.remove(Duel(droidList.get(pl1-1), droidList.get(pl2-1))); 
+                        droidList.remove(duel(droidList.get(pl1-1), droidList.get(pl2-1))); 
                         // Restore standard output to the console    
                         System.setOut(terminal);               
                     } catch (IOException e) {
@@ -216,7 +217,7 @@ public class Game {
                     System.out.println("Read from file:");
                     System.out.println("Enter filename: ");
                     String filename2 = scanner.next();
-                    ReadFromFile(filename2);
+                    readFromFile(filename2);
                     break;
                 case 7:
                     System.out.println("Exiting...");
@@ -230,7 +231,7 @@ public class Game {
         }
     }
 
-    public static void ReadFromFile(String filename) {
+    public static void readFromFile(String filename) {
         File file = new File(filename);  // File to read from
 
         try (Scanner scanner = new Scanner(file)) {

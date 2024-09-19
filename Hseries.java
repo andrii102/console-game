@@ -61,7 +61,7 @@ public class Hseries extends Droid{
     @Override
     public void attack(Droid target){
         try{
-        if(dead)
+        if(dead || target.isDead())
             return;
         if(count%3 == 0){
             healMates();

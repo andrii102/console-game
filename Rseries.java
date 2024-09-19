@@ -30,7 +30,7 @@ public class Rseries extends Droid{
     
     @Override
     public void attack(Droid target){
-        if(dead)
+        if(dead || target.isDead())
             return;
             try {
                 if (count % 3 == 0) {

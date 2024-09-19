@@ -1,6 +1,6 @@
 public class TankDroid extends Droid{
     public static final String BLUE = "\u001B[34m";
-    private static final String YELLOW = "\u001B[33m";
+    public static final String YELLOW = "\u001B[33m";
 
     int shield;
 
@@ -34,7 +34,7 @@ public class TankDroid extends Droid{
                 System.out.println(COLLOR + name + RESET + " shield absorbed all damage. Remaining shield: " + BLUE + shield + RESET);
                 Thread.sleep(1000);          
             } else {
-                super.takeDamage(damage);   
+                super.takeDamage(damage); 
             }            
         }catch(InterruptedException e) {
             System.out.println("Battle interrupted");

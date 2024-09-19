@@ -52,8 +52,6 @@ public class Droid{
         return dead;
     }
 
-
-
     public void takeDamage(int damage){
         health = health - damage;
         if (health < 0){
@@ -63,7 +61,7 @@ public class Droid{
     }
 
     public void attack(Droid target){
-        if(dead)
+        if(dead || target.isDead())
             return;
         try{
             System.out.println(COLLOR + name + RESET + " is attacking " + target.COLLOR + target.getName() + RESET + "...");
